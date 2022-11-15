@@ -8,7 +8,7 @@
     <title>Weather Forcaast</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
@@ -20,10 +20,10 @@
             <div class = "col-3 bg-light">
             <h2> Search for a city:</h2>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" aria-label="City input" aria-describedby="City Search">
+                <input type="text" class="form-control" id="city-search" aria-label="City input" aria-describedby="City Search">
             </div>
             <div class="d-grid gap-2">
-                <button class="btn btn-primary" type="button" id="Search">Search</button>
+                <button class="btn btn-primary" type="button" id="search">Search</button>
               </div>
             
             <ul class="list-group col-3">
@@ -31,16 +31,16 @@
                 
             </ul>
             </div>
-            
+
             <div class="col-8 mt-1">
                 <div class="row border border-dark border-2">
                     <div class="col-12" id="searched-city">
-                        <h2>City</h2>
-                        <p id="Temp">Temp:</p>
-                        <p id="Wind">Wind:</p>
-                        <p id="Humidity">Humidity:</p>
+                        <h2 id="current-city">City</h2>
+                        <p id="temp">Temp:</p>
+                        <p id="wind">Wind:</p>
+                        <p id="humidity">Humidity:</p>
                     </div>
-                </div
+                </div>
             </div>
             <div class="col-12 gap-3 m-1">
                 <div class="row ">
@@ -87,6 +87,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
+    <script src="./assets/script.js"></script>
 </body>
 
 </html>

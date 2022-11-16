@@ -83,12 +83,17 @@ function fiveDayForcast(){
         return response.json();
       })
       .then(function (data) {
+        console.log(data)
         for(let i=1;i<=5;i++){
+            var iconElement= document.getElementById('icon-'+i);
             var futureDates = document.getElementById('future-days-'+i);
             var futureTemps = document.getElementById('future-temps-'+i);
             var futureWind = document.getElementById('future-wind-'+i);
             var futureHumidity = document.getElementById('future-humidity-'+i);
             var dayHourCount= (i*8)-1;
+            var icon = data.list[dayHourCount].weather[0].icon;
+            var weatherIconUrl= "http://openweathermap.org/img/wn/"+icon+"@2x.png";
+            iconElement.src=weatherIconUrl;
             futureDates.textContent =new Date(data.list[dayHourCount].dt*1000).toLocaleDateString();
             futureTemps.textContent= "Temp: " + data.list[dayHourCount].main.temp + " °F";
             futureWind.textContent = "Wind: " + data.list[dayHourCount].wind.speed + " mph";

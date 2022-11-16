@@ -5,13 +5,14 @@ var currentTempEl= document.getElementById('temp');
 var currentWindEl= document.getElementById('wind');
 var currentHumidityEl= document.getElementById('humidity');
 var listEl= document.getElementById('list');
+var iconSpotEl= document.getElementById('icon-spot');
 
 var cardsEl = document.getElementsByClassName('card');
 
 var apiKey = "a98edf90fc1d17ee19e0411dd892d134";
 var citys = [];
 var cityLon, cityLat;
-
+iconSpotEl.style.display="none";
 searchButton.addEventListener('click', getCityName);
 
 function getCityName(){
@@ -60,6 +61,11 @@ function currentWeather(){
         return response.json();
       })
       .then(function (data) {
+        console.log(data);
+        var weaatherIcon = data.weather[0].icon;
+        var weatherIconUrl= "http://openweathermap.org/img/wn/"+weaatherIcon+"@2x.png";
+        iconSpotEl.src= weatherIconUrl;
+        iconSpotEl.style.display="block";
         
         cityCurrentEl.textContent= data.name +" "+ new Date(data.dt*1000).toLocaleDateString();
         currentTempEl.textContent= "Temp: "+ data.main.temp+' °F';

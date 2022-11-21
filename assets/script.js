@@ -24,8 +24,6 @@ searchButton.addEventListener('click', function (event) {
 });
 
 function getCityName(name) {
-    
-
     if (!name) {
         alert('Please Enter a city');
         return;
@@ -49,12 +47,7 @@ function cityToLonLat(city) {
                 citys.pop();
                 return;
             }
-
-                
-
-            
             localStorage.setItem('citys', JSON.stringify(citys));
-            
             cityLon = data[0].lon;
             cityLat = data[0].lat;
             currentWeather();
@@ -76,7 +69,7 @@ function currentWeather() {
             iconSpotEl.src = weatherIconUrl;
             iconSpotEl.style.display = "block";
 
-            cityCurrentEl.textContent = data.name + " " + new Date(data.dt * 1000).toLocaleDateString();
+            cityCurrentEl.textContent = data.name + " " + new Date(data.dt*1000).toLocaleString();
             currentTempEl.textContent = "Temp: " + data.main.temp + ' °F';
             currentWindEl.textContent = "Wind: " + data.wind.speed + ' mph';
             currentHumidityEl.textContent = "Humidity: " + data.main.humidity + ' %';
@@ -103,7 +96,7 @@ function fiveDayForcast() {
                 var icon = data.list[dayHourCount].weather[0].icon;
                 var weatherIconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
                 iconElement.src = weatherIconUrl;
-                futureDates.textContent = new Date(data.list[dayHourCount].dt * 1000).toLocaleDateString();
+                futureDates.textContent = new Date(data.list[dayHourCount].dt * 1000).toDateString();
                 futureTemps.textContent = "Temp: " + data.list[dayHourCount].main.temp + " °F";
                 futureWind.textContent = "Wind: " + data.list[dayHourCount].wind.speed + " mph";
                 futureHumidity.textContent = "Humidity: " + data.list[dayHourCount].main.humidity + " %";

@@ -65,7 +65,7 @@ function currentWeather() {
         .then(function (data) {
             console.log(data);
             var weaatherIcon = data.weather[0].icon;
-            var weatherIconUrl = "http://openweathermap.org/img/wn/" + weaatherIcon + "@2x.png";
+            var weatherIconUrl = "https://openweathermap.org/img/wn/" + weaatherIcon + "@2x.png";
             iconSpotEl.src = weatherIconUrl;
             iconSpotEl.style.display = "block";
 
@@ -94,7 +94,7 @@ function fiveDayForcast() {
                 var futureHumidity = document.getElementById('future-humidity-' + i);
                 var dayHourCount = (i * 8) - 1;
                 var icon = data.list[dayHourCount].weather[0].icon;
-                var weatherIconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+                var weatherIconUrl = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
                 iconElement.src = weatherIconUrl;
                 futureDates.textContent = new Date(data.list[dayHourCount].dt * 1000).toDateString();
                 futureTemps.textContent = "Temp: " + data.list[dayHourCount].main.temp + " °F";

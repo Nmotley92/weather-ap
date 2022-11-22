@@ -7,33 +7,43 @@ var currentHumidityEl = document.getElementById('humidity');
 var listEl = document.getElementById('list');
 var iconSpotEl = document.getElementById('icon-spot');
 var listItem;
-
 var apiKey = "a98edf90fc1d17ee19e0411dd892d134";
-var citys = [];
+var citys= [];
 var cityLon, cityLat;
 iconSpotEl.style.display = "none";
-searchButton.addEventListener('click', function (event) {
+// search button clicked
+searchButton.addEventListener('click', startSearch);
+// Search for city if enter is pressed
+document.addEventListener('keydown', (e) => {
+    if (e.which == 13) {
+        startSearch();
+    }
+});
+// Starts the search
+function startSearch() {
     var cityName = citSearchEl.value;
+    if (cityName == "") {
+        return;
+    }
     listItem = document.createElement("button");
     listItem.setAttribute('id', cityName);
     listItem.classList.add("btns", "list-group-item", "list-group-item-action");
     listItem.textContent = cityName;
     listEl.appendChild(listItem);
-    
+    citSearchEl.value= "";
     getCityName(cityName);
-});
-
+}
+// checks to see if name has been entered
 function getCityName(name) {
     if (!name) {
         alert('Please Enter a city');
         return;
     }
     citys.push(name);
-    console.log(citys)
     cityToLonLat(name);
 
 }
-
+// chageds city to lon and lat
 function cityToLonLat(city) {
     fetch('https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&appid=' + apiKey, {
 
@@ -54,7 +64,7 @@ function cityToLonLat(city) {
         });
 
 }
-
+// fetches the current weather
 function currentWeather() {
     fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + cityLat + '&lon=' + cityLon + '&appid=' + apiKey + '&units=imperial', {
 
@@ -63,20 +73,18 @@ function currentWeather() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             var weaatherIcon = data.weather[0].icon;
             var weatherIconUrl = "https://openweathermap.org/img/wn/" + weaatherIcon + "@2x.png";
             iconSpotEl.src = weatherIconUrl;
             iconSpotEl.style.display = "block";
-
-            cityCurrentEl.textContent = data.name + " " + new Date(data.dt*1000).toLocaleString();
+            cityCurrentEl.textContent = data.name + " " + new Date(data.dt * 1000).toLocaleString();
             currentTempEl.textContent = "Temp: " + data.main.temp + ' °F';
             currentWindEl.textContent = "Wind: " + data.wind.speed + ' mph';
             currentHumidityEl.textContent = "Humidity: " + data.main.humidity + ' %';
             fiveDayForcast();
         });
 }
-
+// fetches the 5 day forecast
 function fiveDayForcast() {
     fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + cityLat + '&lon=' + cityLon + '&appid=' + apiKey + '&units=imperial', {
 
@@ -85,7 +93,6 @@ function fiveDayForcast() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
             for (let i = 1; i <= 5; i++) {
                 var iconElement = document.getElementById('icon-' + i);
                 var futureDates = document.getElementById('future-days-' + i);
@@ -105,25 +112,29 @@ function fiveDayForcast() {
             }
         });
 }
-
+// If recent list is clicked restarts that city search
 listEl.addEventListener('click', function (event) {
     var targetcity = event.target.id;
     getCityName(targetcity);
 })
+// Pull recent city searches from local data
+window.onload = function () {
+ var newCitys = JSON.parse(localStorage.getItem('citys'))
 
-window.onload = function() {        
-   var citys = JSON.parse(localStorage.getItem('citys'))
-   for(let i=0; i<citys.length;i++)
-   {var listItems = document.createElement('button');
-    listItems.classList.add("btns", "list-group-item", "list-group-item-action");
-    listItems.textContent= citys[i];
-    listItems.setAttribute('id', citys[i]);
-    listEl.appendChild(listItems);
-   }
-   }
-   
-clrBtn=document.getElementById('clear');
-clrBtn.addEventListener('click', ()=>{
+    if (newCitys == null) {
+        return;
+    }
+    for (let i = 0; i < newCitys.length; i++) {
+        var listItems = document.createElement('button');
+        listItems.classList.add("btns", "list-group-item", "list-group-item-action");
+        listItems.textContent = newCitys[i];
+        listItems.setAttribute('id', newCitys[i]);
+        listEl.appendChild(listItems);
+    }
+}
+// if clear button is click clear localStorage
+clrBtn = document.getElementById('clear');
+clrBtn.addEventListener('click', () => {
     localStorage.clear();
     window.location.reload();
 })

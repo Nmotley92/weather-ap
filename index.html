@@ -12,27 +12,33 @@
 </head>
 
 <body>
+    <!-- Header -->
     <div class="jumbotron container-fluid mt-2 text-center p-2" style="background-color:#070474 ;color: white;">
         <h1> <strong>Weather Dashboard</strong></h1>
     </div>
+    
     <div class="container">
         <div class=" row">
             <div class="col-3 bg-light">
                 <h2> Search for a city:</h2>
                 <div class="input-group mb-3">
+                    <!-- Search box -->
                     <input type="text" class="form-control" id="city-search" aria-label="City input"
                         aria-describedby="City Search">
                     <div class="d-grid gap-2">
+                        <!-- dearch button -->
                         <button class="btn btn-primary" type="button" id="search">Search</button>
                     </div>
                 </div>
+                <!-- Empty list for recent searches -->
                 <div id="list" class="list-group col">
 
                 
                 </div>
+                <!-- but to clear local sotrage -->
                 <button class="btn btn-primary" id="clear">clear</button>
             </div>
-
+            <!-- Current weather -->
             <div class="col-8 mt-1">
                 <div class="row border border-dark border-2">
                     <div class="col-12" id="searched-city">
@@ -43,7 +49,7 @@
                         <p id="humidity">Humidity:</p>
                     </div>
                 </div>
-
+                <!-- 5 day forecast -->
                 <div class="col-12">
                     <div class="row ">
                         

@@ -44,7 +44,7 @@ Get updates on the weather by searching for the city
 
 
 ## link to deployed application
-:link: 
+:link: https://nmotley92.github.io/weather-dash/
 
 
 

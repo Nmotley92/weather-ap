@@ -41,6 +41,7 @@ Get updates on the weather by searching for the city
 
 ```
 ## Visuals
+[demo-weather-dash.webm](https://user-images.githubusercontent.com/114119193/203220842-ff4240f6-71d2-41b6-bd5a-89363b0ebde1.webm)
 
 
 ## link to deployed application
